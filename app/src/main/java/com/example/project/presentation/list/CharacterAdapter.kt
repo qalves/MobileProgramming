@@ -11,6 +11,8 @@ import com.example.project.R
 class CharacterAdapter(private var dataSet: List<Character>) :
     RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
+    var listener: ((Character) -> Unit)? =null
+
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
@@ -21,6 +23,8 @@ class CharacterAdapter(private var dataSet: List<Character>) :
         init {
             // Define click listener for the ViewHolder's View.
             textView = view.findViewById(R.id.character_name)
+
+
         }
     }
 
@@ -45,6 +49,9 @@ class CharacterAdapter(private var dataSet: List<Character>) :
         // contents of the view with that element
         val character = dataSet[position]
         viewHolder.textView.text = character.name
+        viewHolder.itemView.setOnClickListener {
+            listener?.invoke(character)
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)

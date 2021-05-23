@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project.R
@@ -24,8 +25,12 @@ class CharacterListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
-    private val adapter = CharacterAdapter(listOf())
+    private val adapter = CharacterAdapter(listOf(), ::onClickedCharacter)
     private val layoutManager = LinearLayoutManager(context)
+
+    private fun onClickedCharacter(character : Character){
+        findNavController().navigate(R.id.navigateToCharacterListFragment)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
